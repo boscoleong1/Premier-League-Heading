@@ -1,0 +1,75 @@
+---
+title: "Analysis"
+---
+
+Analysis
+
+First I created a statistic for the percentage of headers won, by dividing the numbers of aerials won, by the amount of headers the players engaged in. The total number of headers the players engaged in are calculated by the sum of aerials players won and players lost.
+
+```{r}
+headers <- aerial_won /(aerial_lost+aerial_won)
+```
+
+I then obtian a summary of the headers statistic, and find that there are 44 NAs. These NAs represents the number of players who have engaged in 0 aerial challenges during the 2016/2-17 premier league season.
+```{r}
+summary(headers)
+```
+
+Doing an intial analysis of the scatterplot graph of the statistic "headers" and the players' height, we can see that there seems to be a positive linear correlation between the two variable.
+```{r}
+plot(headers~height)
+```
+
+Upon a deeper analysis of this relationship, we can see that there are significant evidence that height and headers are indeed correlated, at a significance level close to 0, with a correlation of 0.015. That means that for 1 cm of height, the associated increase % of headers won is about 1.5%.
+```{r}
+summary(lm(headers~height))
+```
+
+Midfielders are normally considered to be shorter than strikers and defenders, the ability to challenge for balls are more valued in the strikers and defender positions, as they can more effiiently be turned into goals or defensive clearances. Therefore there is a possibility that it is one of the positions that is dragging the significance up. To better decipher this, I identified the correlation between the headers and height, after categorizing players by position. (Defenders = 1, Midfielders = 2, Forwards = 3)
+
+```{r}
+cor(headers[position == 3], height[position == 3], use = "pairwise.complete.obs")
+cor(headers[position == 2], height[position == 2], use = "pairwise.complete.obs")
+cor(headers[position == 1], height[position == 1], use = "pairwise.complete.obs")
+```
+
+There seem to be a fair amount of differences with the correlation between height and headers amount the position categories. As suspected, the correlation is highest among strikers at 0.5279464, then defenders at 0.4202176 and then midfielders is the lowest at 0.374691. To find a deeper analysis, I used position as a factor variable along with height to predict the amount of headers won as well as conducted linear regression analysis within each category.
+
+```{r}
+summary(lm(headers[position== 1] ~ height[position ==1]))
+summary(lm(headers[position== 2] ~ height[position ==2]))
+summary(lm(headers[position== 3] ~ height[position ==3]))
+summary(lm(headers ~ height* factor(position)))
+```
+
+Through the within category linear regression anlysis, we can see that the difference is slight, only at about 0.0005 difference in correlation between the defenders and forwards. This is confirmed by using position as a factor variable. While the height is still a significant variable, it does not seem that the position introduced a significant effect into the equation, as neither a factor variable nor as a interaction coefficient with height.
+
+Fans often argue that players need adaptaion into the first team playing, particularly a competitive league like the premier league. They take time to learn and show their potential. Perhaps this "learning" also applies to ability to win aerial challenges. I shall conduct a model for both the number of games played in the Premier League, their height and their headers ability.
+
+```{r}
+summary(lm(headers ~ appearances + height))
+```
+
+As you can see here, even though learning may apply to the other aspects. It seems that the ability to win aerial challenges are not significantly affected by the number of appearance made by the individuals. 
+
+Finally I want to see if the aerial ability of strikers actually translate to a substantial increase into chances for a goal, such that it would make sense for Premier League clubs to pay a premium for taller strikers that are better at contesting in the air.
+
+```{r}
+goalspg <- goals/appearances
+summary(lm(goalspg [position==3] ~ headers[position==3]))
+```
+Here I created a new statistic that gives the goals scored per game, and analyzed a linear regression model between goals per game and the % of headers won. There is no significant correlation. It may also be that instead of scoring the goals from winning the aerial challenge, the striker may be providing an assist for a goal. 
+
+```{r}
+goalspg <- goals/appearances
+summary(lm(goalassistspg [position==3] ~ headers[position==3]))
+```
+
+Similarly here, we can see that there is no significant correlation between goals and assists per game with the players' heading ability. It seems that the Premier League clubs are being inefficient in the distribution of their funds when they are spending a premier to buy taller strikers, strictly in terms of the goals and assists they may provide. 
+
+```{r}
+plot(goalspg [position ==3] ~ headers [position ==3])
+plot(goalassistspg [position ==3] ~ headers [position ==3])
+```
+
+Strangely enough, when we plot the dataset, there seems to be a large divide between the two groups of attacking players. Several players are much better at translating their aerial challenges into goals and assists, whiles others' aerial challenges result in close to no goals and assist. This may be due to the fact taht both strikers and wingers are categorized as attacking players in this dataset.

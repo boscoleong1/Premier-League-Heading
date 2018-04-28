@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Analysis</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Player Heading Ability Analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Index.html">Introduction</a>
+</li>
+<li>
+  <a href="Data_and_Methods.html">Data and Methods</a>
+</li>
+<li>
+  <a href="Analysis.html">Analysis</a>
+</li>
+<li>
+  <a href="Discussion_and_Conclusion.html">Discussion and Conclusion</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Analysis</h1>
+
+</div>
+
+
+<p>Analysis</p>
+<p>First I created a statistic for the percentage of headers won, by dividing the numbers of aerials won, by the amount of headers the players engaged in. The total number of headers the players engaged in are calculated by the sum of aerials players won and players lost.</p>
+<pre class="r"><code>headers &lt;- aerial_won /(aerial_lost+aerial_won)</code></pre>
+<p>I then obtian a summary of the headers statistic, and find that there are 44 NAs. These NAs represents the number of players who have engaged in 0 aerial challenges during the 2016/2-17 premier league season.</p>
+<pre class="r"><code>summary(headers)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+##  0.0000  0.3636  0.4918  0.4696  0.5952  1.0000      44</code></pre>
+<p>Doing an intial analysis of the scatterplot graph of the statistic “headers” and the players’ height, we can see that there seems to be a positive linear correlation between the two variable.</p>
+<pre class="r"><code>plot(headers~height)</code></pre>
+<p><img src="Analysis_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Upon a deeper analysis of this relationship, we can see that there are significant evidence that height and headers are indeed correlated, at a significance level close to 0, with a correlation of 0.015. That means that for 1 cm of height, the associated increase % of headers won is about 1.5%.</p>
+<pre class="r"><code>summary(lm(headers~height))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = headers ~ height)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.52509 -0.07644  0.01049  0.08447  0.59523 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -2.257360   0.247780   -9.11   &lt;2e-16 ***
+## height       0.015040   0.001366   11.01   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.1587 on 326 degrees of freedom
+##   (44 observations deleted due to missingness)
+## Multiple R-squared:  0.2711, Adjusted R-squared:  0.2689 
+## F-statistic: 121.3 on 1 and 326 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Midfielders are normally considered to be shorter than strikers and defenders, the ability to challenge for balls are more valued in the strikers and defender positions, as they can more effiiently be turned into goals or defensive clearances. Therefore there is a possibility that it is one of the positions that is dragging the significance up. To better decipher this, I identified the correlation between the headers and height, after categorizing players by position. (Defenders = 1, Midfielders = 2, Forwards = 3)</p>
+<pre class="r"><code>cor(headers[position == 3], height[position == 3], use = &quot;pairwise.complete.obs&quot;)</code></pre>
+<pre><code>## [1] 0.5279464</code></pre>
+<pre class="r"><code>cor(headers[position == 2], height[position == 2], use = &quot;pairwise.complete.obs&quot;)</code></pre>
+<pre><code>## [1] 0.374691</code></pre>
+<pre class="r"><code>cor(headers[position == 1], height[position == 1], use = &quot;pairwise.complete.obs&quot;)</code></pre>
+<pre><code>## [1] 0.4202176</code></pre>
+<p>There seem to be a fair amount of differences with the correlation between height and headers amount the position categories. As suspected, the correlation is highest among strikers at 0.5279464, then defenders at 0.4202176 and then midfielders is the lowest at 0.374691. To find a deeper analysis, I used position as a factor variable along with height to predict the amount of headers won as well as conducted linear regression analysis within each category.</p>
+<pre class="r"><code>summary(lm(headers[position== 1] ~ height[position ==1]))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = headers[position == 1] ~ height[position == 1])
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.45147 -0.06897  0.00326  0.06216  0.48822 
+## 
+## Coefficients:
+##                        Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)           -1.277343   0.336208  -3.799 0.000215 ***
+## height[position == 1]  0.010051   0.001828   5.499 1.74e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.1289 on 141 degrees of freedom
+##   (21 observations deleted due to missingness)
+## Multiple R-squared:  0.1766, Adjusted R-squared:  0.1707 
+## F-statistic: 30.24 on 1 and 141 DF,  p-value: 1.742e-07</code></pre>
+<pre class="r"><code>summary(lm(headers[position== 2] ~ height[position ==2]))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = headers[position == 2] ~ height[position == 2])
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.47658 -0.06545  0.00570  0.08422  0.60628 
+## 
+## Coefficients:
+##                        Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)           -1.439448   0.395736  -3.637  0.00039 ***
+## height[position == 2]  0.010357   0.002198   4.713 5.96e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.1572 on 136 degrees of freedom
+##   (18 observations deleted due to missingness)
+## Multiple R-squared:  0.1404, Adjusted R-squared:  0.1341 
+## F-statistic: 22.21 on 1 and 136 DF,  p-value: 5.964e-06</code></pre>
+<pre class="r"><code>summary(lm(headers[position== 3] ~ height[position ==3]))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = headers[position == 3] ~ height[position == 3])
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.36361 -0.06485 -0.01409  0.08391  0.30306 
+## 
+## Coefficients:
+##                        Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)           -2.433790   0.654704  -3.717 0.000555 ***
+## height[position == 3]  0.015370   0.003686   4.170 0.000137 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.1465 on 45 degrees of freedom
+##   (5 observations deleted due to missingness)
+## Multiple R-squared:  0.2787, Adjusted R-squared:  0.2627 
+## F-statistic: 17.39 on 1 and 45 DF,  p-value: 0.0001368</code></pre>
+<pre class="r"><code>summary(lm(headers ~ height* factor(position)))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = headers ~ height * factor(position))
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.47658 -0.06711  0.00346  0.07198  0.60628 
+## 
+## Coefficients:
+##                            Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)              -1.2773434  0.3754118  -3.403 0.000752 ***
+## height                    0.0100513  0.0020410   4.925 1.35e-06 ***
+## factor(position)2        -0.1621043  0.5217100  -0.311 0.756217    
+## factor(position)3        -1.1564464  0.7446853  -1.553 0.121421    
+## height:factor(position)2  0.0003056  0.0028658   0.107 0.915135    
+## height:factor(position)3  0.0053191  0.0041564   1.280 0.201557    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.1439 on 322 degrees of freedom
+##   (44 observations deleted due to missingness)
+## Multiple R-squared:  0.4079, Adjusted R-squared:  0.3987 
+## F-statistic: 44.36 on 5 and 322 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Through the within category linear regression anlysis, we can see that the difference is slight, only at about 0.0005 difference in correlation between the defenders and forwards. This is confirmed by using position as a factor variable. While the height is still a significant variable, it does not seem that the position introduced a significant effect into the equation, as neither a factor variable nor as a interaction coefficient with height.</p>
+<p>Fans often argue that players need adaptaion into the first team playing, particularly a competitive league like the premier league. They take time to learn and show their potential. Perhaps this “learning” also applies to ability to win aerial challenges. I shall conduct a model for both the number of games played in the Premier League, their height and their headers ability.</p>
+<pre class="r"><code>summary(lm(headers ~ appearances + height))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = headers ~ appearances + height)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.51551 -0.08344  0.01052  0.08655  0.60529 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -2.271e+00  2.479e-01  -9.161   &lt;2e-16 ***
+## appearances  1.097e-04  9.184e-05   1.195    0.233    
+## height       1.506e-02  1.365e-03  11.032   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.1586 on 325 degrees of freedom
+##   (44 observations deleted due to missingness)
+## Multiple R-squared:  0.2743, Adjusted R-squared:  0.2699 
+## F-statistic: 61.43 on 2 and 325 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>As you can see here, even though learning may apply to the other aspects. It seems that the ability to win aerial challenges are not significantly affected by the number of appearance made by the individuals.</p>
+<p>Finally I want to see if the aerial ability of strikers actually translate to a substantial increase into chances for a goal, such that it would make sense for Premier League clubs to pay a premium for taller strikers that are better at contesting in the air.</p>
+<pre class="r"><code>goalspg &lt;- goals/appearances
+summary(lm(goalspg [position==3] ~ headers[position==3]))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = goalspg[position == 3] ~ headers[position == 3])
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.3326 -0.2736 -0.2363  0.3125  0.8664 
+## 
+## Coefficients:
+##                        Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)              0.3602     0.1290   2.792  0.00766 **
+## headers[position == 3]  -0.3399     0.3797  -0.895  0.37541   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.4393 on 45 degrees of freedom
+##   (5 observations deleted due to missingness)
+## Multiple R-squared:  0.0175, Adjusted R-squared:  -0.004334 
+## F-statistic: 0.8015 on 1 and 45 DF,  p-value: 0.3754</code></pre>
+<p>Here I created a new statistic that gives the goals scored per game, and analyzed a linear regression model between goals per game and the % of headers won. There is no significant correlation. It may also be that instead of scoring the goals from winning the aerial challenge, the striker may be providing an assist for a goal.</p>
+<pre class="r"><code>goalspg &lt;- goals/appearances
+summary(lm(goalassistspg [position==3] ~ headers[position==3]))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = goalassistspg[position == 3] ~ headers[position == 
+##     3])
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.3963 -0.2886 -0.1987  0.2331  0.9959 
+## 
+## Coefficients:
+##                        Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)              0.4941     0.1247   3.961 0.000263 ***
+## headers[position == 3]  -0.4599     0.3670  -1.253 0.216705    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.4247 on 45 degrees of freedom
+##   (5 observations deleted due to missingness)
+## Multiple R-squared:  0.03371,    Adjusted R-squared:  0.01224 
+## F-statistic:  1.57 on 1 and 45 DF,  p-value: 0.2167</code></pre>
+<p>Similarly here, we can see that there is no significant correlation between goals and assists per game with the players’ heading ability. It seems that the Premier League clubs are being inefficient in the distribution of their funds when they are spending a premier to buy taller strikers, strictly in terms of the goals and assists they may provide.</p>
+<pre class="r"><code>plot(goalspg [position ==3] ~ headers [position ==3])</code></pre>
+<p><img src="Analysis_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="r"><code>plot(goalassistspg [position ==3] ~ headers [position ==3])</code></pre>
+<p><img src="Analysis_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+<p>Strangely enough, when we plot the dataset, there seems to be a large divide between the two groups of attacking players. Several players are much better at translating their aerial challenges into goals and assists, whiles others’ aerial challenges result in close to no goals and assist. This may be due to the fact taht both strikers and wingers are categorized as attacking players in this dataset.</p>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

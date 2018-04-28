@@ -1,0 +1,18 @@
+name: "BDS website"
+output_dir: "."
+navbar:
+  title: "Player Heading Ability Analysis"
+  left:
+    - text: "Introduction"
+      href: Index.html
+    - text: "Data and Methods"
+      href: Data_and_Methods.html
+    - text: "Analysis"
+      href: Analysis.html
+    - text: "Discussion and Conclusion"
+      href: Discussion_and_Conclusion.html
+   
+      
+output:
+  html_document:
+    theme: cosmo

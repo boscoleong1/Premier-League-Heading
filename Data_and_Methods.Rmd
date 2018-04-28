@@ -1,0 +1,10 @@
+---
+title: "Data and Methods"
+---
+
+
+  I shall be using a dataset containing the ingame statistic as well as demogrpahic information for all players who has played at least one game in the 2016 / 2017 Premier League season. 
+ 
+  I shall be analyzing % of aerials won, a statistic derived from diving aerials won by the sum of aerial lost and aerial won, with their height (in cm). By contrasting this %aerial won statistic with the height of the players, I shall find out whether height makes a difference for "heading ability" overall. 
+  
+  I shall then get a deeper insight by categorizing the players into their positions: defenders, midfielders and offensive players. I shall then be contrasting the players' heading ability with their height with other players within the same position category, to minimize confounding factors. 
