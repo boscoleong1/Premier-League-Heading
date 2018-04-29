@@ -10,6 +10,13 @@ We also found that the player's ability to head the ball do not seem to signific
 
 Finally, we also found that there is no concrete evidence that, for attacking players, the ability to win an aerial ball can be translated into goals or assists. However, we did very large differences between two groups of attacking football players, in their ability to translate aerial challenges into goals and assists. A further analysis is suggested to find data on the roles of the attacking players and see if the ability to translate aerial challenges into goals and assists depends on their role was a winger or a striker.
 
+Limits:
+There are several limits to my analysis. First and foremost, the analysis may cause the data to be skewed. The analysis assumes that players who have engaged in 0 aerial battles throughout the season as N/A as opposed to 0 percent winrate and thus are not included in the analysis, this may skew the winrates to the right. These players are still important to consider as they may not be engaging in aerial battle due to their height. 
+
+Further into the analysis, I found that there seem to be two very distinct group of players within the attackers dataset. If I had been able to identify that earlier or had an idea what separats these two groups, I may be able to provide a better analysis of the dataset. 
+These two distinct groups may act as outliers,which linear regression is very senstive to. 
+
+I mainly used linear regressions in this project, commonly linear regressions is a not suitable model for relationships that are nonlinear. While one might expect the relationship to be similar to a linear relationship, the fact that there are two types of players, may mean that a non-linear model may be a better fit if we can separate and isolate these groups of players.
 
 Conclusion:
 

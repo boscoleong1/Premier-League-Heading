@@ -56,16 +56,21 @@ Finally I want to see if the aerial ability of strikers actually translate to a 
 
 ```{r}
 goalspg <- goals/appearances
+summary(lm(goalspg ~ headers))
 summary(lm(goalspg [position==3] ~ headers[position==3]))
 ```
-Here I created a new statistic that gives the goals scored per game, and analyzed a linear regression model between goals per game and the % of headers won. There is no significant correlation. It may also be that instead of scoring the goals from winning the aerial challenge, the striker may be providing an assist for a goal. 
+I first start by creating a new statistic for goals per game, this statistic helps me standardize in order to analyze the rate of goals influenced by the ability to win an aerial challenge. This seem to yield a significant negative correlation of the two statistic. In order to get a better idea of what this means, I narrowed the scope to just strikers
+
+Then I analyzed a linear regression model between goals per game and the % of headers won for just attacking players (position 3). There is no significant correlation. It may also be that instead of scoring the goals from winning the aerial challenge, the striker may be providing an assist for a goal. 
 
 ```{r}
-goalspg <- goals/appearances
+goalassistspg <- (goals + goal_assist)/appearances
+summary(lm(goalassistspg ~ headers))
 summary(lm(goalassistspg [position==3] ~ headers[position==3]))
 ```
 
-Similarly here, we can see that there is no significant correlation between goals and assists per game with the players' heading ability. It seems that the Premier League clubs are being inefficient in the distribution of their funds when they are spending a premier to buy taller strikers, strictly in terms of the goals and assists they may provide. 
+
+Similarly here, we can see that there is no significant correlation between goals and assists per game with the players' heading ability for strikers, while in general we also see a negative correlation in our linear regression model. It seems that the Premier League clubs are being inefficient in the distribution of their funds when they are spending a premier to buy taller strikers, strictly in terms of the goals and assists they may provide. 
 
 ```{r}
 plot(goalspg [position ==3] ~ headers [position ==3])

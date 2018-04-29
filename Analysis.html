@@ -355,7 +355,27 @@ $(document).ready(function () {
 <p>As you can see here, even though learning may apply to the other aspects. It seems that the ability to win aerial challenges are not significantly affected by the number of appearance made by the individuals.</p>
 <p>Finally I want to see if the aerial ability of strikers actually translate to a substantial increase into chances for a goal, such that it would make sense for Premier League clubs to pay a premium for taller strikers that are better at contesting in the air.</p>
 <pre class="r"><code>goalspg &lt;- goals/appearances
-summary(lm(goalspg [position==3] ~ headers[position==3]))</code></pre>
+summary(lm(goalspg ~ headers))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = goalspg ~ headers)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.26669 -0.16549 -0.11518 -0.05718  1.01200 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  0.29150    0.04998   5.832 1.32e-08 ***
+## headers     -0.30350    0.09901  -3.065  0.00236 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.3322 on 326 degrees of freedom
+##   (44 observations deleted due to missingness)
+## Multiple R-squared:  0.02802,    Adjusted R-squared:  0.02504 
+## F-statistic: 9.397 on 1 and 326 DF,  p-value: 0.002355</code></pre>
+<pre class="r"><code>summary(lm(goalspg [position==3] ~ headers[position==3]))</code></pre>
 <pre><code>## 
 ## Call:
 ## lm(formula = goalspg[position == 3] ~ headers[position == 3])
@@ -375,9 +395,30 @@ summary(lm(goalspg [position==3] ~ headers[position==3]))</code></pre>
 ##   (5 observations deleted due to missingness)
 ## Multiple R-squared:  0.0175, Adjusted R-squared:  -0.004334 
 ## F-statistic: 0.8015 on 1 and 45 DF,  p-value: 0.3754</code></pre>
-<p>Here I created a new statistic that gives the goals scored per game, and analyzed a linear regression model between goals per game and the % of headers won. There is no significant correlation. It may also be that instead of scoring the goals from winning the aerial challenge, the striker may be providing an assist for a goal.</p>
-<pre class="r"><code>goalspg &lt;- goals/appearances
-summary(lm(goalassistspg [position==3] ~ headers[position==3]))</code></pre>
+<p>I first start by creating a new statistic for goals per game, this statistic helps me standardize in order to analyze the rate of goals influenced by the ability to win an aerial challenge. This seem to yield a significant negative correlation of the two statistic. In order to get a better idea of what this means, I narrowed the scope to just strikers</p>
+<p>Then I analyzed a linear regression model between goals per game and the % of headers won for just attacking players (position 3). There is no significant correlation. It may also be that instead of scoring the goals from winning the aerial challenge, the striker may be providing an assist for a goal.</p>
+<pre class="r"><code>goalassistspg &lt;- (goals + goal_assist)/appearances
+summary(lm(goalassistspg ~ headers))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = goalassistspg ~ headers)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.34331 -0.16709 -0.10351 -0.02678  1.05334 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  0.44312    0.04796   9.240  &lt; 2e-16 ***
+## headers     -0.48585    0.09499  -5.115 5.37e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.3188 on 326 degrees of freedom
+##   (44 observations deleted due to missingness)
+## Multiple R-squared:  0.07428,    Adjusted R-squared:  0.07144 
+## F-statistic: 26.16 on 1 and 326 DF,  p-value: 5.375e-07</code></pre>
+<pre class="r"><code>summary(lm(goalassistspg [position==3] ~ headers[position==3]))</code></pre>
 <pre><code>## 
 ## Call:
 ## lm(formula = goalassistspg[position == 3] ~ headers[position == 
@@ -398,7 +439,7 @@ summary(lm(goalassistspg [position==3] ~ headers[position==3]))</code></pre>
 ##   (5 observations deleted due to missingness)
 ## Multiple R-squared:  0.03371,    Adjusted R-squared:  0.01224 
 ## F-statistic:  1.57 on 1 and 45 DF,  p-value: 0.2167</code></pre>
-<p>Similarly here, we can see that there is no significant correlation between goals and assists per game with the players’ heading ability. It seems that the Premier League clubs are being inefficient in the distribution of their funds when they are spending a premier to buy taller strikers, strictly in terms of the goals and assists they may provide.</p>
+<p>Similarly here, we can see that there is no significant correlation between goals and assists per game with the players’ heading ability for strikers, while in general we also see a negative correlation in our linear regression model. It seems that the Premier League clubs are being inefficient in the distribution of their funds when they are spending a premier to buy taller strikers, strictly in terms of the goals and assists they may provide.</p>
 <pre class="r"><code>plot(goalspg [position ==3] ~ headers [position ==3])</code></pre>
 <p><img src="Analysis_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <pre class="r"><code>plot(goalassistspg [position ==3] ~ headers [position ==3])</code></pre>
