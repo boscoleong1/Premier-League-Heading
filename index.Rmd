@@ -1,0 +1,23 @@
+---
+title: 'Introduction'
+---
+  
+  This project seeks to find whether areial ability is affected by a football player's height.
+ 
+  Although tall strikers in the premier league have often been valued for their aerial finesse (Peter Crouch, Andy Carroll to name a few), there has been no statistical analysis proving this relationship. On the otherhand, Alan Nevill, a professor at the University of Wolverhampton, found that teams with taller players are statistically less likely to win trophies due to their lower BMI. (1)
+  
+  Being an avid fan myself, I was curious to find whether this is necessarily the case at such a high level of professional football. This analytical piece should also provide evidence as to why clubs consider paying and charging a premium for taller players, even though Prof Nevill has shown that they are a disadvantage to the team. By categorizing the players into categories, by position, I will be able to see whether this relationship between height and ability to win headers is a general relationship or one that is more specific to the position of the players. (defenders, midfielders, strikers) And whether this affects your win ratio.
+  
+  
+  
+  Research Hypothesis:
+  
+  Catergorized by their positions, a player's height will increase his % of headers won.
+  
+  H0:
+  Catergorized by their positions, a player's height does not affect the % of headers won.
+  
+  
+  Citations
+  
+  Body of Evidence. (n.d.). Retrieved from https://www.wlv.ac.uk/about-us/news-and-events/wlvdialogue/previous-issues/wlv-dialogue-winter-2014/body-of-evidence/

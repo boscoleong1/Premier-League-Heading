@@ -4,7 +4,7 @@ navbar:
   title: "Player Heading Ability Analysis"
   left:
     - text: "Introduction"
-      href: Index.html
+      href: index.html
     - text: "Data and Methods"
       href: Data_and_Methods.html
     - text: "Analysis"
