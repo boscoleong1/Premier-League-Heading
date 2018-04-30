@@ -206,11 +206,15 @@ $(document).ready(function () {
 </div>
 
 
-<p>I shall be using a dataset containing the ingame statistic as well as demogrpahic information for all players who has played at least one game in the 2016 / 2017 Premier League season.</p>
-<p>I shall be analyzing % of aerials won, a statistic derived from diving aerials won by the sum of aerial lost and aerial won, with their height (in cm). By constructing a linear analysis I shall contrast this %aerial won statistic with the height of the players, in this way I can find out whether height makes a difference for “heading ability” overall.</p>
-<p>I shall then get a deeper insight by categorizing the players into their positions: defenders, midfielders and offensive players. I shall then be contrasting the players’ heading ability with their height with other players within the same position category, to minimize confounding factors.</p>
-<p>To understand whether taller players are worth a premium, I shall be constructing a linear regression model to understand whether these headers won contribute towards a player’s frequency of goals and assists.</p>
-<p>I am also interested in finding whether a player’s ability in the air improves overtime through game experience. THus, I shall also be constructing a linear regression analysis with appearance made and the % of headers won.</p>
+<p>Data: I shall be using a dataset containing the ingame statistic as well as demogrpahic information for all players who has played at least one game in the 2016 / 2017 Premier League season.</p>
+<p>The key statistic I will be using here are the amount of goals and assists by each Premier League player, their height, their appearances as well.</p>
+<p><code>r   hist(height)</code></p>
+<p><img src="Data_and_Methods_files/figure-html/unnamed-chunk-1-1.png" width="672" /> As you can see here, the height of the players (excluding Goalkeepers) are distributed fairly normally, and skewed a little towards the right. It supports the idea that Premier League clubs prefers taller players.</p>
+<p>Methods:</p>
+<p>I shall be analyzing % of aerials won, a statistic derived from diving aerials won by the sum of aerial lost and aerial won, with their height (in cm). By constructing a linear analysis I shall contrast this %aerial won statistic with the height of the players, in this way I can find out whether height makes a difference for “heading ability” overall. Here I shall be using height as an independent variable and the % of aerial challenges won as the dependent variable.</p>
+<p>I shall then get a deeper insight by categorizing the players into their positions: defenders, midfielders and offensive players. I shall then be contrasting the players’ heading ability with their height with other players within the same position category, to minimize confounding factors. I shall be using height and positions as independent variables and the % of aerial challenges won as the dependent variable.</p>
+<p>To understand whether taller players are worth a premium, I shall be constructing a linear regression model to understand whether these headers won contribute towards a player’s frequency of goals and assists. I shall be using the % of aerial challenges won as independent variables and the goals and assists per appearance in the premier league as the dependent variable.</p>
+<p>I am also interested in finding whether a player’s ability in the air improves overtime through game experience. THus, I shall also be constructing a linear regression analysis with appearance made and the % of headers won. Here I shall be using a players’ appearance as the independet variable and the win % rate of aerial challenges as the dependent variable</p>
 
 
 
