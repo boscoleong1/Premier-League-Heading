@@ -10,7 +10,11 @@ Data:
   ```{r}
 hist(height)
 ```
+
+
  As you can see here, the height of the players (excluding Goalkeepers) are distributed fairly normally, and skewed a little towards the right. It supports the idea that Premier League clubs prefers taller players. 
+ 
+ 
  
  
 Methods:
